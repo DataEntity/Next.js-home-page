@@ -20,11 +20,11 @@ const fadeUp = {
 
 export function HomeSection() {
   return (
-    <section id="home" className="flex min-h-screen flex-col justify-between px-5 pt-28 sm:px-8 lg:px-12">
-      <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+    <section id="home" className="flex min-h-dvh flex-col justify-between px-5 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+5.5rem)] sm:px-8 sm:pt-[calc(env(safe-area-inset-top)+6rem)] lg:px-12 lg:pb-6 lg:pt-[calc(env(safe-area-inset-top)+4.75rem)]">
+      <div className="mx-auto grid w-full max-w-7xl flex-1 content-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
         <div>
           <motion.p
-            className="mb-6 text-sm uppercase tracking-[0.35em] text-muted"
+            className="mb-4 text-xs uppercase tracking-[0.28em] text-muted sm:mb-6 sm:text-sm sm:tracking-[0.35em]"
             initial="hidden"
             animate="show"
             variants={fadeUp}
@@ -42,7 +42,7 @@ export function HomeSection() {
             {profile.headline}
           </motion.h1>
           <motion.p
-            className="mt-8 max-w-2xl text-xl leading-8 text-muted"
+            className="mt-6 max-w-2xl text-lg leading-7 text-muted sm:mt-8 sm:text-xl sm:leading-8"
             initial="hidden"
             animate="show"
             variants={fadeUp}
@@ -52,15 +52,15 @@ export function HomeSection() {
           </motion.p>
         </div>
         <motion.div
-          className="min-h-[24rem] rounded-[2.5rem] border border-line bg-ink p-6 text-paper shadow-sm"
+          className="min-h-[clamp(9rem,42dvh,24rem)] rounded-[2rem] border border-line bg-ink p-4 text-paper shadow-sm sm:rounded-[2.5rem] sm:p-6"
           initial="hidden"
           animate="show"
           variants={fadeUp}
           custom={0.45}
         >
-          <div className="flex h-full min-h-[20rem] flex-col justify-between rounded-[2rem] border border-paper/20 p-6">
-            <span className="text-sm uppercase tracking-[0.35em] text-paper/60">Now</span>
-            <p className="font-display text-4xl leading-tight">Reading, writing, and rebuilding this site.</p>
+          <div className="flex h-full min-h-[clamp(7rem,36dvh,20rem)] flex-col justify-between rounded-[1.5rem] border border-paper/20 p-4 sm:rounded-[2rem] sm:p-6">
+            <span className="text-xs uppercase tracking-[0.28em] text-paper/60 sm:text-sm sm:tracking-[0.35em]">Now</span>
+            <p className="font-display text-3xl leading-tight sm:text-4xl">Reading, writing, and rebuilding this site.</p>
           </div>
         </motion.div>
       </div>
@@ -70,7 +70,9 @@ export function HomeSection() {
         variants={fadeUp}
         custom={0.6}
       >
-        <Ticker items={profile.ticker} />
+        <div className="-mx-5 sm:-mx-8 lg:-mx-12">
+          <Ticker items={profile.ticker} />
+        </div>
       </motion.div>
     </section>
   );

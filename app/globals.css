@@ -28,23 +28,52 @@ body {
 
 @layer components {
   .section-shell {
-    @apply min-h-screen border-b border-line px-5 py-24 sm:px-8 lg:px-12;
+    --section-pt: 5.5rem;
+    --section-pb: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-bottom-width: 1px;
+    @apply border-line px-5 sm:px-8 lg:px-12;
+    padding-top: calc(env(safe-area-inset-top) + var(--section-pt));
+    padding-bottom: calc(env(safe-area-inset-bottom) + var(--section-pb));
+  }
+
+  @media (min-width: 640px) {
+    .section-shell {
+      --section-pt: 6rem;
+      --section-pb: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-shell {
+      --section-pt: 4.75rem;
+      --section-pb: 2.25rem;
+    }
   }
 
   .section-inner {
-    @apply mx-auto flex min-h-[calc(100vh-12rem)] w-full max-w-7xl flex-col justify-center;
+    @apply mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center;
   }
 
   .display-title {
-    @apply font-display text-5xl leading-none tracking-tight sm:text-7xl lg:text-8xl;
+    @apply font-display text-balance text-[2.5rem] leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl xl:leading-none;
   }
 
   .muted-text {
     @apply text-muted;
   }
 
+  .section-swiper,
+  .section-swiper .swiper-slide {
+    height: 100vh;
+    height: 100dvh;
+  }
+
   .section-swiper .swiper-pagination {
-    right: 1.25rem;
+    right: 0.75rem;
     left: auto;
     width: auto;
   }

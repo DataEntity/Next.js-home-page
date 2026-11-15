@@ -1,23 +1,68 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { navigationItems } from '@/data/navigation'
 
 export function Header() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    const closeOnDesktop = () => {
+      if (mediaQuery.matches) {
+        setOpen(false)
+      }
+    }
+
+    mediaQuery.addEventListener('change', closeOnDesktop)
+    return () => mediaQuery.removeEventListener('change', closeOnDesktop)
+  }, [])
+
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-line/80 bg-paper/80 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a href="#home" className="font-display text-2xl tracking-tight">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/80 bg-paper/85 pt-[env(safe-area-inset-top)] backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8 lg:px-12">
+        <a href="#home" className="font-display text-2xl tracking-tight" onClick={() => setOpen(false)}>
           KI
         </a>
-        <nav className="hidden items-center gap-6 text-sm text-muted lg:flex">
+        <nav className="hidden items-center gap-4 text-sm text-muted lg:flex xl:gap-6">
           {navigationItems.map((item) => (
             <a key={item.href} href={item.href} className="transition hover:text-ink">
               {item.label}
             </a>
           ))}
         </nav>
-        <a href="#contacts" className="rounded-full border border-ink px-4 py-2 text-sm transition hover:bg-ink hover:text-paper">
-          Contact
-        </a>
+        <div className="flex items-center gap-2">
+          <a href="#contacts" className="rounded-full border border-ink px-4 py-2 text-sm transition hover:bg-ink hover:text-paper" onClick={() => setOpen(false)}>
+            Contact
+          </a>
+          <button
+            type="button"
+            className="rounded-full border border-line px-4 py-2 text-sm lg:hidden"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? 'Close' : 'Menu'}
+          </button>
+        </div>
       </div>
+      {open && (
+        <nav id="site-menu" className="max-h-[calc(100dvh-4rem-env(safe-area-inset-top))] overflow-y-auto border-t border-line/80 bg-paper/95 px-5 py-3 backdrop-blur sm:px-8 lg:hidden">
+          <ul className="grid grid-cols-2 gap-1 sm:grid-cols-3">
+            {navigationItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="block rounded-2xl px-3 py-3 text-base transition hover:bg-ink hover:text-paper"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   )
 }

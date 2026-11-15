@@ -88,7 +88,7 @@ export function PageIntro() {
           Personal Homepage
         </motion.p>
         <motion.h1
-          className="font-display text-6xl tracking-tight sm:text-8xl"
+          className="font-display text-5xl tracking-tight sm:text-7xl md:text-8xl"
           variants={itemVariants}
         >
           {profile.name}

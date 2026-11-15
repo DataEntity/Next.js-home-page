@@ -57,7 +57,7 @@ export function SectionSwiper({ children }: SectionSwiperProps) {
   }
 
   return (
-    <main className="h-screen overflow-hidden">
+    <main className="h-dvh overflow-hidden">
       <Swiper
         className="section-swiper h-full w-full"
         direction="vertical"
@@ -100,7 +100,7 @@ export function SectionSwiper({ children }: SectionSwiperProps) {
             <SwiperSlide
               key={hash}
               data-hash={hash}
-              className="!h-screen overflow-y-auto"
+              className="!h-dvh overflow-y-auto"
             >
               {slide}
             </SwiperSlide>
