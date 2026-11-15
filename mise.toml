@@ -1,0 +1,23 @@
+[tools]
+node = "24.15.0"
+pnpm = "9.15.0"
+
+[tasks.install]
+description = "Install dependencies"
+run = "pnpm install"
+
+[tasks.dev]
+description = "Start the Next.js development server"
+run = "pnpm dev"
+
+[tasks.build]
+description = "Build the production bundle"
+run = "pnpm build"
+
+[tasks.start]
+description = "Start the production server"
+run = "pnpm start"
+
+[tasks.lint]
+description = "Run ESLint"
+run = "pnpm lint"
