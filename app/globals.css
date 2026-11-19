@@ -87,3 +87,75 @@ body {
     opacity: 1;
   }
 }
+
+html.has-custom-cursor,
+html.has-custom-cursor *,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role="button"] {
+  cursor: none;
+}
+
+html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]),
+html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]) * {
+  cursor: revert;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  visibility: hidden;
+  transition: none;
+}
+
+.custom-cursor.is-visible {
+  visibility: visible;
+}
+
+.custom-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 8px;
+  height: 8px;
+  border: 0 solid #fff;
+  border-radius: 999px;
+  background: #fff;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition:
+    width 160ms,
+    height 160ms,
+    background-color 160ms,
+    border-color 160ms,
+    border-width 160ms,
+    transform 160ms;
+}
+
+.custom-cursor__dot.is-active {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border-width: 1px;
+}
+
+.custom-cursor__dot.is-pressed {
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor__dot,
+  .custom-cursor__dot.is-pressed {
+    transform: translate(-50%, -50%);
+    transition: none;
+  }
+}
