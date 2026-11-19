@@ -11,7 +11,7 @@ export function ServicesSection() {
   return (
     <Section id="services" eyebrow="Services" title="四個暫存的主題">
       <div className="grid gap-4 sm:gap-6 lg:grid-cols-[minmax(16rem,0.82fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-8">
-        <div className="grid grid-cols-1 gap-2 min-[480px]:grid-cols-2 lg:content-center lg:grid-cols-1 lg:gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:content-center lg:grid-cols-1 lg:gap-2">
           {services.map((service, index) => {
             const active = activeIndex === index
 
@@ -20,7 +20,7 @@ export function ServicesSection() {
                 key={service.title}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className="w-full rounded-2xl border border-line p-4 text-left transition hover:bg-ink hover:text-paper data-[active=true]:bg-ink data-[active=true]:text-paper sm:rounded-3xl sm:p-5 lg:flex lg:items-center lg:justify-between lg:gap-4 lg:rounded-2xl lg:px-5 lg:py-3"
+                className="min-h-11 w-full rounded-2xl border border-line p-4 text-left transition fine:hover:bg-ink fine:hover:text-paper focus-visible:bg-ink focus-visible:text-paper active:bg-ink active:text-paper data-[active=true]:bg-ink data-[active=true]:text-paper sm:rounded-3xl sm:p-5 lg:flex lg:items-center lg:justify-between lg:gap-4 lg:rounded-2xl lg:px-5 lg:py-3"
                 data-active={active}
               >
                 <span className={`text-xs uppercase tracking-[0.2em] sm:text-sm sm:tracking-[0.25em] lg:shrink-0 ${active ? 'text-paper/60' : 'text-muted'}`}>{service.part}</span>

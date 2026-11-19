@@ -20,24 +20,24 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line/80 bg-paper/85 pt-[env(safe-area-inset-top)] backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8 lg:px-12">
-        <a href="#home" className="font-display text-2xl tracking-tight" onClick={() => setOpen(false)}>
+      <div className="page-gutter mx-auto flex h-16 max-w-7xl items-center justify-between gap-3">
+        <a href="#home" className="inline-flex min-h-11 items-center font-display text-2xl tracking-tight" onClick={() => setOpen(false)}>
           KI
         </a>
         <nav className="hidden items-center gap-4 text-sm text-muted lg:flex xl:gap-6">
           {navigationItems.map((item) => (
-            <a key={item.href} href={item.href} className="transition hover:text-ink">
+            <a key={item.href} href={item.href} className="inline-flex min-h-11 items-center transition fine:hover:text-ink focus-visible:text-ink active:text-ink">
               {item.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="#contacts" className="rounded-full border border-ink px-4 py-2 text-sm transition hover:bg-ink hover:text-paper" onClick={() => setOpen(false)}>
+          <a href="#contacts" className="inline-flex min-h-11 items-center rounded-full border border-ink px-4 text-sm transition fine:hover:bg-ink fine:hover:text-paper focus-visible:bg-ink focus-visible:text-paper active:bg-ink active:text-paper" onClick={() => setOpen(false)}>
             Contact
           </a>
           <button
             type="button"
-            className="rounded-full border border-line px-4 py-2 text-sm lg:hidden"
+            className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm lg:hidden"
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => setOpen((value) => !value)}
@@ -47,13 +47,13 @@ export function Header() {
         </div>
       </div>
       {open && (
-        <nav id="site-menu" className="max-h-[calc(100dvh-4rem-env(safe-area-inset-top))] overflow-y-auto border-t border-line/80 bg-paper/95 px-5 py-3 backdrop-blur sm:px-8 lg:hidden">
+        <nav id="site-menu" className="page-gutter max-h-[calc(100dvh-4rem-env(safe-area-inset-top))] overflow-y-auto border-t border-line/80 bg-paper/95 py-3 backdrop-blur lg:hidden">
           <ul className="grid grid-cols-2 gap-1 sm:grid-cols-3">
             {navigationItems.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="block rounded-2xl px-3 py-3 text-base transition hover:bg-ink hover:text-paper"
+                  className="flex min-h-11 items-center rounded-2xl px-3 py-3 text-base transition fine:hover:bg-ink fine:hover:text-paper focus-visible:bg-ink focus-visible:text-paper active:bg-ink active:text-paper"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}

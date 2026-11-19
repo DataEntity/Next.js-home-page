@@ -47,7 +47,7 @@ export function SectionSwiper({ children }: SectionSwiperProps) {
   }, []);
 
   if (!pagerEnabled) {
-    return <main className="min-h-screen">{children}</main>;
+    return <main className="min-h-screen overflow-x-clip">{children}</main>;
   }
 
   if (slides.length !== SECTION_HASHES.length) {

@@ -7,7 +7,7 @@ export function WritersSection() {
     <Section id="writers" eyebrow="Writers" title="我喜歡的作家">
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {writers.map((writer) => (
-          <Card key={writer.name} className="flex min-h-52 flex-col justify-between sm:min-h-64 lg:min-h-80">
+          <Card key={writer.name} className="flex flex-col justify-between lg:min-h-80">
             <div>
               <h3 className="font-display text-3xl sm:text-4xl">{writer.name}</h3>
               <p className="mt-2 text-sm uppercase tracking-[0.25em] text-muted">{writer.role}</p>

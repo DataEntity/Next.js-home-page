@@ -11,7 +11,7 @@ export function BlogSection() {
           href="https://blog.kirishima.dev/"
           target="_blank"
           rel="noreferrer"
-          className="flex min-h-40 items-end rounded-[1.5rem] border border-line bg-ink p-6 text-paper transition hover:-translate-y-1 sm:min-h-64 sm:rounded-[2rem] sm:p-8"
+          className="flex min-h-40 items-end rounded-[1.5rem] border border-line bg-ink p-6 text-paper transition fine:hover:-translate-y-1 focus-visible:-translate-y-1 active:-translate-y-1 sm:min-h-64 sm:rounded-[2rem] sm:p-8"
         >
           <span className="font-display text-4xl sm:text-5xl">Open Blog</span>
         </a>
