@@ -91,6 +91,10 @@ body {
     .section-inner {
       @apply flex flex-1 flex-col justify-center;
     }
+
+    #blog .section-inner {
+      justify-content: safe center;
+    }
   }
 
   .display-title {
