@@ -13,7 +13,7 @@ export function ContactsSection() {
             <a
               key={contact.href}
               href={contact.href}
-              className="flex min-h-11 items-center justify-between gap-4 p-4 font-display text-3xl transition fine:hover:bg-ink fine:hover:text-paper focus-visible:bg-ink focus-visible:text-paper active:bg-ink active:text-paper sm:p-6 sm:text-4xl"
+              className="flex min-h-11 items-center justify-between gap-4 p-4 font-display text-2xl transition fine:hover:bg-ink fine:hover:text-paper focus-visible:bg-ink focus-visible:text-paper active:bg-ink active:text-paper lg:p-6 lg:text-4xl"
             >
               {contact.label}
               <span aria-hidden="true">↗</span>

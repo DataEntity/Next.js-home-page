@@ -14,15 +14,15 @@ function PostDate({ date, className }: { date: string; className: string }) {
 
 function FeaturedPost({ post }: { post: BlogPost }) {
   return (
-    <a href={post.href} target="_blank" rel="noreferrer" className={`group block rounded-3xl p-4 sm:p-6 lg:p-4 ${linkSurface}`}>
+    <a href={post.href} target="_blank" rel="noreferrer" className={`group block rounded-3xl p-4 ${linkSurface}`}>
       <PostDate date={post.date} className={`text-xs tracking-[0.28em] sm:text-sm sm:tracking-[0.32em] ${mutedOnInk}`} />
-      <h3 className="mt-3 flex items-start justify-between gap-4 font-display text-3xl sm:mt-4 lg:mt-2">
+      <h3 className="mt-2 flex items-start justify-between gap-4 font-display text-3xl">
         <span className="min-w-0">{post.title}</span>
         <span aria-hidden="true" className="shrink-0">
           ↗
         </span>
       </h3>
-      {post.summary ? <p className={`mt-3 line-clamp-2 sm:mt-4 lg:mt-2 ${mutedOnInk}`}>{post.summary}</p> : null}
+      {post.summary ? <p className={`mt-2 line-clamp-2 ${mutedOnInk}`}>{post.summary}</p> : null}
     </a>
   )
 }
@@ -36,7 +36,7 @@ function PostList({ posts }: { posts: BlogPost[] }) {
           href={post.href}
           target="_blank"
           rel="noreferrer"
-          className={`group grid min-h-11 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 p-4 sm:p-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-end lg:px-4 lg:py-3 ${linkSurface}`}
+          className={`group grid min-h-11 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 px-4 py-3 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-end ${linkSurface}`}
         >
           <h3 className="min-w-0 font-display text-2xl">{post.title}</h3>
           <span aria-hidden="true" className="font-display text-2xl md:col-start-3">
@@ -58,14 +58,14 @@ export async function BlogSection() {
 
   return (
     <Section id="blog" eyebrow="Blog" title="最近寫的" subtitle="閱讀札記、生活瑣事，和還沒想完的念頭。">
-      <div className="flex flex-col gap-6 sm:gap-8 lg:gap-4">
+      <div className="flex flex-col gap-4">
         {featured ? <FeaturedPost post={featured} /> : null}
         {rest.length > 0 ? <PostList posts={rest} /> : null}
         <a
           href="https://blog.kirishima.dev/writing/"
           target="_blank"
           rel="noreferrer"
-          className={`inline-flex min-h-11 w-fit items-center gap-3 self-start rounded-full px-4 font-display text-2xl sm:px-6 lg:px-4 ${linkSurface}`}
+          className={`inline-flex min-h-11 w-fit items-center gap-3 self-start rounded-full px-4 font-display text-2xl ${linkSurface}`}
         >
           全部寫作
           <span aria-hidden="true">↗</span>

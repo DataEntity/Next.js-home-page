@@ -18,6 +18,16 @@ export function Header() {
     return () => mediaQuery.removeEventListener('change', closeOnDesktop)
   }, [])
 
+  useEffect(() => {
+    document.documentElement.toggleAttribute('data-menu-open', open)
+    window.dispatchEvent(new CustomEvent('site-menu-toggle', { detail: open }))
+
+    return () => {
+      document.documentElement.removeAttribute('data-menu-open')
+      window.dispatchEvent(new CustomEvent('site-menu-toggle', { detail: false }))
+    }
+  }, [open])
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line/80 bg-paper/85 pt-[env(safe-area-inset-top)] backdrop-blur">
       <div className="page-gutter mx-auto flex h-16 max-w-7xl items-center justify-between gap-3">

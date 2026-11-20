@@ -30,12 +30,21 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(4rem + env(safe-area-inset-top));
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   background: #f4f0e8;
   color: #151515;
+  overflow-x: clip;
+}
+
+html:has(.section-swiper),
+html:has(.section-swiper) body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 ::selection {
@@ -55,8 +64,8 @@ body {
   }
 
   .section-shell {
-    --section-pt: 2.75rem;
-    --section-pb: 2.5rem;
+    --section-pt: 4.75rem;
+    --section-pb: 1.25rem;
     display: flex;
     flex-direction: column;
     border-bottom-width: 1px;
@@ -65,13 +74,6 @@ body {
     padding-bottom: calc(env(safe-area-inset-bottom) + var(--section-pb));
     padding-left: var(--gutter-left);
     @apply border-line;
-  }
-
-  @media (min-width: 640px) {
-    .section-shell {
-      --section-pt: 3.5rem;
-      --section-pb: 3rem;
-    }
   }
 
   @media (min-width: 1024px) {
@@ -125,6 +127,11 @@ body {
     height: 100dvh;
   }
 
+  .section-swiper .swiper-slide {
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+
   .section-swiper .swiper-pagination {
     right: 0.75rem;
     left: auto;
@@ -138,6 +145,37 @@ body {
 
   .section-swiper .swiper-pagination-bullet-active {
     opacity: 1;
+  }
+}
+
+.section-swiper.swiper {
+  overflow: clip;
+}
+
+@media (max-width: 1023px) {
+  .section-swiper.swiper-vertical,
+  .section-swiper.swiper-vertical .swiper-slide {
+    touch-action: pan-y;
+  }
+
+  .section-swiper .swiper-slide {
+    overscroll-behavior-y: contain;
+    scroll-behavior: auto;
+  }
+
+  .section-swiper .section-shell,
+  .section-swiper #home {
+    min-height: 100%;
+  }
+
+  .section-swiper .swiper-pagination {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-swiper .swiper-wrapper {
+    transition-duration: 0ms !important;
   }
 }
 

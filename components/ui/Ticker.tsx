@@ -7,7 +7,7 @@ export function Ticker({ items }: TickerProps) {
 
   return (
     <div className="overflow-hidden border-y border-line py-4">
-      <div className="flex w-max animate-[ticker_28s_linear_infinite] gap-8 whitespace-nowrap font-display text-xl text-muted sm:text-3xl lg:text-4xl">
+      <div className="flex w-max animate-[ticker_28s_linear_infinite] gap-8 whitespace-nowrap font-display text-xl text-muted lg:text-4xl">
         <span>{text}</span>
         <span>{text}</span>
         <span>{text}</span>
