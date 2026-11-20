@@ -146,7 +146,7 @@ function bindMobileGesture(swiper: SwiperInstance) {
     const dx = Math.abs(event.clientX - startX);
     const dy = Math.abs(event.clientY - startY);
     if (dx < TAP_SLOP && dy < TAP_SLOP) {
-      swiper.allowClick = true;
+      (swiper as SwiperInstance & { allowClick: boolean }).allowClick = true;
     }
   };
 
