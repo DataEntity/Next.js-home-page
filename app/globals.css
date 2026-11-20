@@ -154,8 +154,9 @@ html:has(.section-swiper) body {
 
 @media (max-width: 1023px) {
   .section-swiper.swiper-vertical,
+  .section-swiper.swiper-vertical .swiper-wrapper,
   .section-swiper.swiper-vertical .swiper-slide {
-    touch-action: pan-y;
+    touch-action: none;
   }
 
   .section-swiper .swiper-slide {

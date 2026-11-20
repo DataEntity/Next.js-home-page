@@ -84,12 +84,39 @@ function syncHash(index: number) {
   window.history.replaceState(null, "", next);
 }
 
+function activeScroller(swiper: SwiperInstance, target: EventTarget | null) {
+  const slide = swiper.slides[swiper.activeIndex] as HTMLElement | undefined;
+  if (!slide) {
+    return null;
+  }
+
+  return scrollTarget(target, slide);
+}
+
+function scrollWithFinger(scroller: HTMLElement, step: number) {
+  const maxScroll = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+  const next = Math.min(maxScroll, Math.max(0, scroller.scrollTop - step));
+  if (Math.abs(next - scroller.scrollTop) < 0.5) {
+    return false;
+  }
+
+  scroller.scrollTop = next;
+  return true;
+}
+
 function bindMobileGesture(swiper: SwiperInstance) {
   const el = swiper.el;
   let startX = 0;
   let startY = 0;
   let lastY = 0;
-  let direction = 0;
+
+  const claimGesture = () => {
+    el.style.touchAction = "none";
+    swiper.wrapperEl.style.touchAction = "none";
+    swiper.slides.forEach((slide) => {
+      slide.style.touchAction = "none";
+    });
+  };
 
   const onPointerDown = (event: PointerEvent) => {
     if (event.pointerType === "mouse" && event.button !== 0) {
@@ -99,38 +126,41 @@ function bindMobileGesture(swiper: SwiperInstance) {
     startX = event.clientX;
     startY = event.clientY;
     lastY = event.clientY;
-    direction = 0;
-    swiper.allowTouchMove = false;
+    claimGesture();
+
+    const scroller = activeScroller(swiper, event.target);
+    const overflows = scroller ? canScroll(scroller, "up") || canScroll(scroller, "down") : false;
+    swiper.allowTouchMove = !menuIsOpen() && !overflows;
   };
 
-  const updateTouch = (clientY: number, target: EventTarget | null) => {
+  const applyMove = (clientY: number, target: EventTarget | null) => {
     const step = clientY - lastY;
     lastY = clientY;
 
-    if (Math.abs(step) >= 2) {
-      direction = step > 0 ? 1 : -1;
+    if (Math.abs(step) < 1) {
+      return;
     }
 
-    if (menuIsOpen() || direction === 0) {
+    if (menuIsOpen()) {
       swiper.allowTouchMove = false;
       return;
     }
 
-    const slide = swiper.slides[swiper.activeIndex] as HTMLElement | undefined;
-    if (!slide) {
+    const scroller = activeScroller(swiper, target);
+    if (!scroller) {
       swiper.allowTouchMove = true;
       return;
     }
 
-    const scroller = scrollTarget(target, slide);
-    const blocked =
-      (direction > 0 && canScroll(scroller, "up")) || (direction < 0 && canScroll(scroller, "down"));
-
-    swiper.allowTouchMove = !blocked;
+    swiper.allowTouchMove = !scrollWithFinger(scroller, step);
   };
 
   const onPointerMove = (event: PointerEvent) => {
-    updateTouch(event.clientY, event.target);
+    if (event.pointerType === "touch") {
+      return;
+    }
+
+    applyMove(event.clientY, event.target);
   };
 
   const onTouchMove = (event: TouchEvent) => {
@@ -139,7 +169,11 @@ function bindMobileGesture(swiper: SwiperInstance) {
       return;
     }
 
-    updateTouch(touch.clientY, event.target);
+    applyMove(touch.clientY, event.target);
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
   };
 
   const onPointerUp = (event: PointerEvent) => {
@@ -156,9 +190,10 @@ function bindMobileGesture(swiper: SwiperInstance) {
     }
   };
 
+  claimGesture();
   el.addEventListener("pointerdown", onPointerDown, true);
   el.addEventListener("pointermove", onPointerMove);
-  el.addEventListener("touchmove", onTouchMove, { passive: true });
+  el.addEventListener("touchmove", onTouchMove, { passive: false });
   el.addEventListener("pointerup", onPointerUp);
   el.addEventListener("pointercancel", onPointerUp);
   window.addEventListener("site-menu-toggle", onMenuToggle);
