@@ -92,6 +92,20 @@ body {
       @apply flex flex-1 flex-col justify-center;
     }
 
+    #blog.section-shell {
+      --section-pt: 4.5rem;
+      --section-pb: 1rem;
+    }
+
+    #blog .section-heading {
+      margin-bottom: 1rem;
+    }
+
+    #blog .display-title {
+      font-size: 2.5rem;
+      line-height: 1.05;
+    }
+
     #blog .section-inner {
       justify-content: safe center;
     }
