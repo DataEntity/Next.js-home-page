@@ -94,7 +94,11 @@ function activeScroller(swiper: SwiperInstance, target: EventTarget | null) {
 }
 
 function scrollWithFinger(scroller: HTMLElement, step: number) {
-  const maxScroll = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+  const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+  if (maxScroll <= 1) {
+    return false;
+  }
+
   const next = Math.min(maxScroll, Math.max(0, scroller.scrollTop - step));
   if (Math.abs(next - scroller.scrollTop) < 0.5) {
     return false;
